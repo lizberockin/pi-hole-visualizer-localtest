@@ -22,10 +22,10 @@ def generate_interval_data(raw_data, interval):
     ads = 0
 
     #sort and reverse data so that latest time intervals appear first in list
-    for counter, key in enumerate(sorted(raw_data['domains_over_time'].keys(), reverse=True)):
+    for counter, key in enumerate(sorted(raw_data['domains_being_blocked'].keys(), reverse=True)):
         if interval == 10:
-            domains = raw_data['domains_over_time'][key]
-            ads = raw_data['ads_over_time'][key]
+            domains = raw_data['domains_being_blocked'][key]
+            ads = raw_data['ads_blocked_today'][key]
             interval_data.append([domains, (ads / domains) * 100 if domains > 0 else 0])
         else:
             if interval == 30:
@@ -49,8 +49,8 @@ def generate_interval_data(raw_data, interval):
                     domains = 0
                     ads = 0
 
-            domains += raw_data['domains_over_time'][key]
-            ads += raw_data['ads_over_time'][key]
+            domains += raw_data['domains_being_blocked'][key]
+            ads += raw_data['ads_blocked_today'][key]
 
     #extract a slice of the previous 24 hours
     if interval == 10:
